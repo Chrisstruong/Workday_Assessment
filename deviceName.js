@@ -1,41 +1,44 @@
 function deviceNameSystem(devicenames) {
-    // const map = new Map()
-    // const result = []
-    // for (const name of devicenames) {
-    //     const count = map.get(name) || 0 //get current count or 0 if not exitsts
-    //     console.log(count)
-    //     const newName = count ===0 ? name :`${name}${count}`//add count suffix if needed
-    //     result.push(newName)
-    //     map.set(name, count+1) //increment count
 
-    // }
-    // return result
+    // Description: Given an array of strings and some of them are repeated strings. The main point of this challenge is to make each repeated strings to be unique by adding the number at the end of their strings.
+    // Input: 
+    // + "devicenames" : array of strings
+    // Output: RETURN the array of unique string
 
-    const alreadyUniqueString = devicenames.filter((name) => {
-        return devicenames.indexOf(name) === devicenames.lastIndexOf(name)
-    })
+    // Thinking: I need to declare an array to store repeated strings. And then compare it to the original strings. I will have another variable to store the repeated times. I will add the num at the end of string in the original array if the repeated times is >= 1
+    // Steps:
+    // 1) Use filter method to create an array with repeated strings.
+    // 2) Declare a variable to store repeated times.
+    // 3) Using the nested loop to know how many times of the strings in "firstAppearedDevice" repeated. If it is >= 1, then add number at the end in the original array. The reason why it has to be >= 1 as I want to add 1 at the beginning.
+    // 4) RETURN the original array "devicenames"
 
+    // Step 1:
     const firstAppearedDevice = devicenames.filter((name) => {
         return devicenames.indexOf(name) !== devicenames.lastIndexOf(name)
     })
-    firstAppearedDevice.sort()
-    let count = 1
-    firstAppearedDevice[0]+=0
-    for (let i = 1; i < firstAppearedDevice.length; i++) {
-        let a = firstAppearedDevice[i].slice(0)
-        let b = firstAppearedDevice[i-1].slice(0,-1)
-        if (a !== b) {count = 0}
-        firstAppearedDevice[i] += `${count}`
-        count++
-    }
 
-    for (let j = 0; j < firstAppearedDevice.length; j++) {
-       firstAppearedDevice[j]= firstAppearedDevice[j].replace("0","")
-    }
-
+    // Step 2:
+    let repeatedTimes
     
-    const result = [...alreadyUniqueString, ...firstAppearedDevice]
-    return result
+    // Step 3:
+    for (let i = 0; i < firstAppearedDevice.length; i++) {
+        repeatedTimes = -1//it personally has to be -1 because I want to avoid adding 1 at the first repeated. Ex: If there is a first repeated, repeatedTime = 0, then 0 < 1 (repeatedTimes >= 1 is the condition) => false => No adding 1 at the first appeared
+        for (let j = 0; j < devicenames.length; j++){
+            if (firstAppearedDevice[i] === devicenames[j]) {
+                repeatedTimes++
+            }
+            if(firstAppearedDevice[i] === devicenames[j]&& repeatedTimes >= 1) {
+                devicenames[j] += repeatedTimes
+            }
+            
+        }
+    }
+
+    // Step 4:
+    return devicenames
+
+    // Time complexity: O(n^2) as there is a nested loop. The runtimes = the length of input ^ 2
+    // Space complexity: O(n) as the length of output is proportional to the length of input
 
 }
 
