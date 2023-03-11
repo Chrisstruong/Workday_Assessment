@@ -36,6 +36,8 @@ function getMaxGrossValue(arr) {
 
     // Time complexity: O(n^3) since there three for loops. Everytime the length of the input increase by one, the runtime will time 3
     // Space complexity: O(1) since return an integer
+
+    // I am not very sure if this solution is 100% correct. If you had a bit of time, I would appreciate your help to make my current solution better.
     
   }
 
