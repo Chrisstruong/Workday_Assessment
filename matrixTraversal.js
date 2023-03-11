@@ -1,33 +1,26 @@
 function getMaxEnergy(mat) {
     const n = mat.length;
-    let maxEnergy = 0;
-    let dp = Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
+    const dp = Array.from({length: n}, () => Array(n).fill(0));
+    // dp[i][j] represents the maximum energy we can have at cell (i, j)
+    // after reaching there from the top row
   
-    // Initialize the dp array with the initial energy
-    for (let i = 0; i < n; i++) {
-      dp[0][i] = 100 - mat[0][i];
-      maxEnergy = Math.max(maxEnergy, dp[0][i]);
+    // Initialize the last row of dp with the values of mat
+    for (let j = 0; j < n; j++) {
+      dp[n-1][j] = mat[n-1][j];
     }
   
-    // Traverse the matrix using dynamic programming
-    for (let i = 1; i < n; i++) {
+    // Traverse the matrix from bottom to top
+    for (let i = n-2; i >= 0; i--) {
       for (let j = 0; j < n; j++) {
-        let energy = 0;
-        if (j > 0) {
-          energy = Math.max(energy, dp[i-1][j-1] - mat[i][j]);
-        }
-        energy = Math.max(energy, dp[i-1][j] - mat[i][j]);
-        if (j < n-1) {
-          energy = Math.max(energy, dp[i-1][j+1] - mat[i][j]);
-        }
-        dp[i][j] = energy;
-        if (i === n-1) {
-          maxEnergy = Math.max(maxEnergy, energy);
-        }
+        // Calculate the maximum energy we can have after reaching cell (i, j)
+        dp[i][j] = mat[i][j] + Math.max(dp[i+1][j-1], dp[i+1][j], dp[i+1][j+1]);
+        // Make sure the energy does not go below 0
+        dp[i][j] = Math.max(dp[i][j], 0);
       }
     }
   
-    return maxEnergy;
+    // Return the maximum energy we can have at any cell in the first row
+    return Math.max(...dp[0]);
   }
 
 console.log(getMaxEnergy([
