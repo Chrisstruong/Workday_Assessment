@@ -1,35 +1,34 @@
-function getMaxGrossValue(arr) {
-    const n = arr.length;
-    let maxGrossValue = -Infinity;
-    let prefixSum = [0];
-
-    // Calculate prefix sums
-    for (let i = 1; i <= n; i++) {
-        prefixSum[i] = prefixSum[i - 1] + arr[i - 1];
+function getMaxEnergy(mat) {
+    const n = mat.length;
+    let maxEnergy = 0;
+    let dp = Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
+  
+    // Initialize the dp array with the initial energy
+    for (let i = 0; i < n; i++) {
+      dp[0][i] = 100 - mat[0][i];
+      maxEnergy = Math.max(maxEnergy, dp[0][i]);
     }
-
-    // Check all valid triplets
-    for (let i = 1; i <= n - 2; i++) {
-        for (let j = i + 1; j <= n - 1; j++) {
-            for (let k = j + 1; k <= n; k++) {
-                // Calculate the gross value of the triplet
-                const grossValue =
-                    prefixSum[i] - prefixSum[0] -
-                    (prefixSum[j] - prefixSum[i]) +
-                    (prefixSum[k] - prefixSum[j]) -
-                    (prefixSum[n] - prefixSum[k]);
-
-                // Update the maximum gross value if the current one is greater
-                if (grossValue > maxGrossValue) {
-                    maxGrossValue = grossValue;
-                }
-            }
+  
+    // Traverse the matrix using dynamic programming
+    for (let i = 1; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        let energy = 0;
+        if (j > 0) {
+          energy = Math.max(energy, dp[i-1][j-1] - mat[i][j]);
         }
+        energy = Math.max(energy, dp[i-1][j] - mat[i][j]);
+        if (j < n-1) {
+          energy = Math.max(energy, dp[i-1][j+1] - mat[i][j]);
+        }
+        dp[i][j] = energy;
+        if (i === n-1) {
+          maxEnergy = Math.max(maxEnergy, energy);
+        }
+      }
     }
-
-    // Return the maximum gross value
-    return maxGrossValue;
-}
+  
+    return maxEnergy;
+  }
 
 console.log(getMaxEnergy([
     [10, 20, 30, 40],
