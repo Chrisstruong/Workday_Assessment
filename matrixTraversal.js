@@ -15,7 +15,20 @@ function getMaxEnergy(mat) {
     // 4) At the end, we will have the four best minimum wasted energy (energy still have the highest energy left at the last row) in an array.
     // 5) Return the biggest energy left in that array
 
-    mat = 
+    let initialEnergy = 100
+    let i =0, j=0
+    const maxEnergyLeftArray = []
+
+    // 1) Calculation i=0 and j=0
+    initialEnergy -= mat[i][j]
+    i++
+
+    let smallEnergy = Math.min(mat[i][j], mat[i][j+1])
+    initialEnergy -= smallEnergy
+    i++
+
+    smallEnergy = Math.min(mat[i][j], mat[i][j-1], mat)
+
 
 }
 
