@@ -65,6 +65,8 @@ function cheatingVersion(mat) {
     }
     return initialEnergy-mat[0][0]-mat[1][0]-mat[2][0]-mat[3][0]
 
+    // Time complexity: O(n) as there is a for loop
+    // Space complexity: 0(1)
     
 }
 
