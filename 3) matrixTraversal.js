@@ -5,14 +5,14 @@ function getMaxEnergy(mat) {
     // Output: the maximum energy left
     // Thinking: 
     // 1) I will start at the first row. There are 4 starting point I need to track. mat[0][0], mat[0][1], mat[0][2], mat[0][3]. 
-    // 2) When going next row (i=1), there are three options for j: j-1, j, or j+1. Every element in the row can go with j, but at the beginning and the end, the options are j,j+1, and j, j-1 respectivelly. We have to track the current value j so as to give the approriate answer
+    // 2) When going next row (i=1), there are three options for j: j-1 (left), j(center), or j+1(right). Every element in the row can go with j, but at the beginning and the end, the options are j(center), j+1(right), and j(center), j-1(left) respectivelly. We have to track the current value j so as to give the approriate value for j
     // 3) When we can determine the position of j (j!==undefined), then choose the smallest energy in the row to calculate
     // 4) This process is keep going and going until we reach the last row
 
     // Steps:
     // 1) get the minEnergy will return the maxEnergy left => Declare the minEnergy, n (mat.length), let energy = 100
     // 2) Use two for loops for multi-dimensional array
-    // 3) if left (j-1), center (j), right (j+1) are not undefined, then take smallest value among these. Otherwise only calculating not undefined variables only
+    // 3) if left (j-1), center (j), right (j+1) are not undefined, then take smallest value among these. Otherwise calculating not undefined variables only
     // 4) Declare currEnergy to keep update the energy left after each row
     // 5) set currEnergy = minEnergy and then return minEnergy
 
@@ -45,6 +45,7 @@ function getMaxEnergy(mat) {
 
     // Time complexity: O(n^2) as there is nested loops
     // Space complexity: O(1) as the return is a int
+    // I am afraid to say that this solution is based on chatGPT, but I have changed Math.min instead of Math.max because I do not understand why it uses Math.max while we need to find the min energy each row so as to find max energy left.
 }
 
 let input = [
@@ -62,11 +63,12 @@ function cheatingVersion(mat) {
     let initialEnergy = 100
     for (let i = 0; i < mat.length; i++) {
         mat[i].sort((a,b)=> a-b)
-    }
+    }//after this we have:
+    // input2 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
     return initialEnergy-mat[0][0]-mat[1][0]-mat[2][0]-mat[3][0]
 
-    // Time complexity: O(n) as there is a for loop
-    // Space complexity: 0(1)
+    // Time complexity: O(1) since the runtimes is approximately the same since there is given 4x4 matrix 
+    // Space complexity: 0(1) since there is only an integer in return
     
 }
 
