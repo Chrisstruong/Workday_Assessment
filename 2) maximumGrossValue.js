@@ -8,8 +8,8 @@ function getMaxGrossValue(arr) {
     // 2) Run for loop with variable i
     // 3) Run for loop with variable j = i+1
     // 4) Run for loop with variable k = j+1
-    // 5) Compare max with the latest grossvalue
-    // 6) Return
+    // 5) Compare max with the latest grossvalue. If max < grossvalue, max = grossvalue (This is how we can update the max)
+    // 6) Return max
 
     // STEP 1
     let maxGrossValue = 0
