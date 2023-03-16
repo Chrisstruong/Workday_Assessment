@@ -64,7 +64,7 @@ function cheatingVersion(mat) {
     for (let i = 0; i < mat.length; i++) {
         mat[i].sort((a, b) => a - b)// input2 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
         initialEnergy -= mat[i][0] // initialEnergy(100) - 1 - 5 - 9 - 13 = 72
-    }//after this we have:
+    }
     return initialEnergy
 
     // Time complexity: O(1) since the runtimes is approximately the same since there is given 4x4 matrix 
