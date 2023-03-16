@@ -62,15 +62,14 @@ function cheatingVersion(mat) {
     // Since we can go columly (center), sort each row in the array from smallest to biggest. Then take 100 - first element of each row. hihihi! 
     let initialEnergy = 100
     for (let i = 0; i < mat.length; i++) {
-        mat[i].sort((a,b)=> a-b)
-        initialEnergy -= mat[i][0]
+        mat[i].sort((a, b) => a - b)// input2 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
+        initialEnergy -= mat[i][0] // initialEnergy(100) - 1 - 5 - 9 - 13 = 72
     }//after this we have:
-    // input2 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
     return initialEnergy
 
     // Time complexity: O(1) since the runtimes is approximately the same since there is given 4x4 matrix 
     // Space complexity: 0(1) since there is only an integer in return
-    
+
 }
 
 let input2 = [
