@@ -59,7 +59,7 @@ console.log(getMaxEnergy(input))
 
 // Cheating version for matrixTraversal
 function cheatingVersion(mat) {
-    // Since we can go columly, sort each row in the array from smallest to biggest. Then take 100 - first element of each row. hihihi! 
+    // Since we can go columly (center), sort each row in the array from smallest to biggest. Then take 100 - first element of each row. hihihi! 
     let initialEnergy = 100
     for (let i = 0; i < mat.length; i++) {
         mat[i].sort((a,b)=> a-b)
