@@ -16,7 +16,8 @@ function deviceNameSystem(devicenames) {
     const firstAppearedDevice = devicenames.filter((name) => {
         return devicenames.indexOf(name) !== devicenames.lastIndexOf(name)
     })
-    // firstAppearedDevice = ['switch', 'tv']
+    console.log(firstAppearedDevice)
+    // firstAppearedDevice = ['switch', 'switch', 'switch, 'tv', 'tv']
 
     // Step 2:
     let repeatedTimes
